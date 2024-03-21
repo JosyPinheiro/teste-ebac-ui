@@ -49,18 +49,21 @@ describe ('Funcionalidade: Login', () => {
 
     })
 
-    it.only('Deve fazer login com sucesso - Usando fixture' , () =>{
+    it('Deve fazer login com sucesso - Usando fixture' , () =>{
         cy.fixture('perfil').then( dados =>{
-            cy.get('#username').type(dados.usuario , {log: false})
+        cy.get('#username').type(dados.usuario , {log: false})
         cy.get('#password').type(dados.senha , {log: false})
         cy.get('.woocommerce-form > .button').click()
         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, josy.teste (não é josy.teste? Sair)')
 
         })
-
-
-
     })
 
+it('Deve fazer login com sucesso - usando Comandos customizados ', () => {
+    cy.login('josy.teste@teste.com' , 'teste@123')
+    cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, josy.teste (não é josy.teste? Sair)')
+
+
+});
 
 })
